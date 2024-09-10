@@ -68,7 +68,8 @@ public extension Popover {
         }
 
         if attributes.source == .stayAboveWindows {
-            context.windowSublayersKeyValueObservationToken = window.layer.observe(\.sublayers) { _, _ in
+            context.windowSublayersKeyValueObservationToken = window.layer.observe(\.sublayers) { [weak window, weak container] _, _ in
+                guard let window, let container else { return }
                 window.bringSubviewToFront(container)
             }
         }
