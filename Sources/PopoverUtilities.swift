@@ -51,24 +51,21 @@ public extension View {
 
      From https://stackoverflow.com/a/66822461/14351818
      */
-    func sizeReader(transaction: Transaction? = nil, size: @escaping (CGSize) -> Void) -> some View {
+    func sizeReader(transaction: Transaction? = nil, size: Binding<CGSize>, sizeChanged: @escaping (CGSize) -> Void) -> some View {
         return background(
             GeometryReader { geometry in
                 Color.clear
                     .preference(key: ContentSizeReaderPreferenceKey.self, value: geometry.size)
                     .onPreferenceChange(ContentSizeReaderPreferenceKey.self) { newValue in
-                        DispatchQueue.main.async {
-                            size(newValue)
-                        }
-                    }
-                    .onValueChange(of: transaction?.animation) { _, _ in
-                        DispatchQueue.main.async {
-                            size(geometry.size)
-                        }
+                        size.wrappedValue = newValue
+                        sizeChanged(size.wrappedValue)
                     }
             }
             .hidden()
         )
+        .onValueChange(of: transaction?.animation) { _, _ in
+            sizeChanged(size.wrappedValue)
+        }
     }
 }
 

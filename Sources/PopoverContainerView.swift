@@ -22,6 +22,8 @@ struct PopoverContainerView: View {
     /// How much to offset the currently-dragging popover.
     @State var selectedPopoverOffset: CGSize = .zero
 
+    @State var size: CGSize = .zero
+
     var body: some View {
         /// Support multiple popovers without interfering with each other.
         ZStack {
@@ -56,7 +58,7 @@ struct PopoverContainerView: View {
                     .opacity(popover.context.size != nil ? 1 : 0)
 
                     /// Read the popover's size in the view.
-                    .sizeReader(transaction: popover.context.transaction) { size in
+                    .sizeReader(transaction: popover.context.transaction, size: $size) { size in
 
                         if
                             let transaction = popover.context.transaction,
