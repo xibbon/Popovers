@@ -63,9 +63,10 @@ public extension View {
             }
             .hidden()
         )
-        .onValueChange(of: transaction?.animation) { _, _ in
-            sizeChanged(size.wrappedValue)
-        }
+        // TODO workaround for input event bug when enabling/disabling popups too quickly
+        //.onValueChange(of: transaction?.animation) { _, _ in
+        //    sizeChanged(size.wrappedValue)
+        //}
     }
 }
 
