@@ -5,10 +5,10 @@
 //  Created by A. Zheng (github.com/aheze) on 12/23/21.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-
-#if os(iOS)
 import Combine
 import SwiftUI
+
+#if os(iOS)
 
 public extension UIView {
     /// Convert a view's frame to global coordinates, which are needed for `sourceFrame` and `excludedFrames.`
@@ -213,5 +213,12 @@ public extension View {
         }
     }
 }
-
+#else
+public extension NSView {
+    /// Convert a view's frame to global coordinates, which are needed for `sourceFrame` and `excludedFrames.`
+    func windowFrame() -> CGRect {
+        // TODO: audit for MacOS, I improvised this, it is not correct.
+        return frame
+    }
+}
 #endif
