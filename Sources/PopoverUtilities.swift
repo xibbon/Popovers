@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 
 public extension UIView {
     /// Convert a view's frame to global coordinates, which are needed for `sourceFrame` and `excludedFrames.`

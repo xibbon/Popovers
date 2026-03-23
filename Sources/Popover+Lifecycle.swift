@@ -5,7 +5,7 @@
 //  Created by A. Zheng (github.com/aheze) on 1/4/22.
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 import SwiftUI
 
 /**
