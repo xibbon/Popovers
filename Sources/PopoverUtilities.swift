@@ -217,8 +217,19 @@ public extension View {
 public extension NSView {
     /// Convert a view's frame to global coordinates, which are needed for `sourceFrame` and `excludedFrames.`
     func windowFrame() -> CGRect {
-        // TODO: audit for MacOS, I improvised this, it is not correct.
-        return frame
+        guard let window else {
+            return .zero
+        }
+
+        let frameInWindow = convert(bounds, to: nil)
+        let contentHeight = window.contentView?.bounds.height ?? window.frame.height
+
+        return CGRect(
+            x: frameInWindow.origin.x,
+            y: contentHeight - frameInWindow.maxY,
+            width: frameInWindow.width,
+            height: frameInWindow.height
+        )
     }
 }
 #endif
