@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 import SwiftUI
 
 /// A hosting view for `PopoverContainerView` with tap filtering.

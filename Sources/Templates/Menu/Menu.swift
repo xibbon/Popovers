@@ -6,7 +6,7 @@
 //  Copyright © 2022 A. Zheng. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 import SwiftUI
 
 public extension Templates {
@@ -151,10 +151,12 @@ public extension Templates {
                     .onChange(of: model.hoveringItemID) { newValue in
 
                         /// Play haptic feedback if enabled.
+#if !os(visionOS)
                         if newValue != nil, configuration.hapticFeedbackEnabled {
                             let generator = UISelectionFeedbackGenerator()
                             generator.selectionChanged()
                         }
+#endif
                     }
             }
         }

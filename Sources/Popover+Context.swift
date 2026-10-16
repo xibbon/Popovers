@@ -6,7 +6,7 @@
 //  Copyright © 2023 A. Zheng. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 import Combine
 import SwiftUI
 
